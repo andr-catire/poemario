@@ -3,13 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poemario para Ti</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Poemario para mi Novia</title>
+    <style>
+        body {
+            margin: 0;
+            background-image: url('fondo.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #letter {
+            cursor: pointer;
+            width: 50%; /* Ajusta el tamaño según sea necesario */
+        }
+    </style>
 </head>
-<body class="pagina1">
-    <div class="contenedor">
-        <img src="letter.png" alt="Carta" class="letter" onclick="irAPoemas()">
-    </div>
-    <script src="script.js"></script>
+<body>
+    <img id="letter" src="letter.jpg" alt="Carta" onclick="location.href='pagina2.html'">
 </body>
 </html>
