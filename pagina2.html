@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poemario - Página 2</title>
+    <style>
+        body {
+            margin: 0;
+            background-image: url('Fondo2.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .imagenes {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 80%;
+        }
+        .imagenes img {
+            width: 30%; /* Ajusta el tamaño según sea necesario */
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .imagenes img:hover {
+            transform: scale(1.1);
+        }
+        #reproductor {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="imagenes">
+        <img src="imagen1.jpg" alt="Imagen 1" onclick="expandir(this)">
+        <img src="imagen2.jpg" alt="Imagen 2" onclick="expandir(this)">
+        <img src="imagen3.jpg" alt="Imagen 3" onclick="expandir(this)">
+        <img src="imagen4.jpg" alt="Imagen 4" onclick="expandir(this)">
+        <img src="imagen5.jpg" alt="Imagen 5" onclick="expandir(this)">
+        <img src="imagen6.jpg" alt="Imagen 6" onclick="expandir(this)">
+    </div>
+    <div id="reproductor">
+        <img src="imagenreproductor.jpg" alt="Reproductor" style="width: 50px; cursor: pointer;" onclick="toggleReproductor()">
+        <audio id="audio" src="piano.mp3" controls style="display: none;"></audio>
+    </div>
+
+    <script>
+        function expandir(img) {
+            const expandedImg = document.createElement('img');
+            expandedImg.src = img.src;
+            expandedImg.style.width = '80%';
+            expandedImg.style.position = 'fixed';
+            expandedImg.style.top = '50%';
+            expandedImg.style.left = '50%';
+            expandedImg.style.transform = 'translate(-50%, -50%)';
+            expandedImg.style.zIndex = '1000';
+            expandedImg.onclick = function() {
+                document.body.removeChild(expandedImg);
+            };
+            document.body.appendChild(expandedImg);
+        }
+
+        function toggleReproductor() {
+            const audio = document.getElementById('audio');
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+    </script>
+</body>
+</html>
