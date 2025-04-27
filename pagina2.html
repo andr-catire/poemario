@@ -3,53 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poemario para mi hermosa novia</title>
+    <title>Poemario - Página 2</title>
     <style>
         body {
             margin: 0;
             background-image: url('Fondo2.jpg');
-            background-size: cover; /* Cubre todo el fondo */
-            background-repeat: no-repeat; /* Evita la repetición de la imagen */
-            background-attachment: fixed; /* Fija el fondo al viewport para un efecto de paralaje si el contenido es más largo */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+            min-height: 100vh;
         }
         .imagenes {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             width: 80%;
-            margin-top: 20px; /* Añade un margen superior para separarlo del borde superior si es necesario */
-            margin-bottom: 20px; /* Añade un margen inferior si es necesario */
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
         .imagenes img {
-            width: calc(33.33% - 20px); /* Ajusta el tamaño para tres imágenes por fila con márgenes */
+            width: calc(33.33% - 20px); /* Ajusta el ancho para tres imágenes por fila */
+            max-width: 150px; /* Añadimos un ancho máximo para limitar el tamaño */
+            height: auto; /* Mantiene la proporción de la imagen */
             margin: 10px;
             cursor: pointer;
             transition: transform 0.2s;
-            box-sizing: border-box; /* Incluye el padding y el border en el ancho y alto del elemento */
+            box-sizing: border-box;
         }
         .imagenes img:hover {
             transform: scale(1.1);
         }
         #reproductor {
             margin-top: 20px;
-            margin-bottom: 20px; /* Añade un margen inferior para espaciado */
+            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centra el reproductor */
+            align-items: center;
         }
         #reproductor img {
             width: 50px;
             cursor: pointer;
-            margin-bottom: 10px; /* Espacio entre el icono y los controles */
+            margin-bottom: 10px;
         }
         #audio {
-            display: none; /* Inicialmente oculto */
-            width: 80%; /* Ancho del reproductor de audio */
-            max-width: 400px; /* Ancho máximo del reproductor de audio */
+            display: none;
+            width: 80%;
+            max-width: 400px;
         }
     </style>
 </head>
@@ -71,14 +73,14 @@
         function expandir(img) {
             const expandedImg = document.createElement('img');
             expandedImg.src = img.src;
-            expandedImg.style.maxWidth = '90%'; /* Ajusta el tamaño máximo de la imagen expandida */
+            expandedImg.style.maxWidth = '90%';
             expandedImg.style.maxHeight = '90%';
             expandedImg.style.position = 'fixed';
             expandedImg.style.top = '50%';
             expandedImg.style.left = '50%';
             expandedImg.style.transform = 'translate(-50%, -50%)';
             expandedImg.style.zIndex = '1000';
-            expandedImg.style.cursor = 'pointer'; /* Indica que se puede hacer clic para cerrar */
+            expandedImg.style.cursor = 'pointer';
             expandedImg.onclick = function() {
                 document.body.removeChild(expandedImg);
             };
@@ -91,13 +93,9 @@
             audio.style.display = isHidden ? 'block' : 'none';
         }
 
-        // Asegurarse de que el reproductor de audio esté inicialmente oculto
-       function toggleReproductor() {
-            const audio = document.getElementById('audio');
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('audio');
+            audio.style.display = 'none';
         });
     </script>
 </body>
