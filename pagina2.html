@@ -93,8 +93,11 @@
             audio.style.display = isHidden ? 'block' : 'none';
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const audio = document.getElementById('audio');
+      function toggleReproductor() {
+        const audio = document.getElementById('audio');
+        if (audio.style.display === 'none') {
+            audio.style.display = 'block';
+        } else {
             audio.style.display = 'none';
         });
     </script>
