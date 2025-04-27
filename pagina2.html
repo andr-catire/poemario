@@ -92,9 +92,12 @@
         }
 
         // Asegurarse de que el reproductor de audio esté inicialmente oculto
-        document.addEventListener('DOMContentLoaded', () => {
-            const audio = document.getElementById('audio');
-            audio.style.display = 'none';
+       function toggleReproductor() {
+            const audio = document.getElementById('audio');
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
         });
     </script>
 </body>
