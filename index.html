@@ -14,17 +14,25 @@
             align-items: center; /* Centra verticalmente */
             height: 100vh; /* Altura completa de la ventana */
         }
-        #letter {
+        #letterButton {
             cursor: pointer;
             width: 40%; /* Ajusta el tamaño según sea necesario */
             max-width: 400px; /* Tamaño máximo para la imagen */
             height: auto; /* Mantiene la proporción de la imagen */
             background: none; /* Asegura que no haya fondo en la imagen */
             border: none; /* Elimina cualquier borde */
+            padding: 0; /* Elimina el padding predeterminado del botón */
+        }
+        #letterButton img {
+            display: block; /* Evita espacio extra debajo de la imagen en algunos navegadores */
+            width: 100%; /* La imagen ocupa todo el botón */
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <img id="letter" src="letter.jpg" alt="Carta" onclick="location.href='pagina2.html'">
+    <button id="letterButton" onclick="location.href='pagina2.html'">
+        <img src="letter.jpg" alt="Haz clic para abrir el poemario">
+    </button>
 </body>
 </html>
