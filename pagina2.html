@@ -79,36 +79,71 @@
     </div>
 
     <script>
+        let imagenes = document.querySelectorAll('.imagenes img');
+        let indiceImagenActual = 0;
+        let expandedImgContainer = null;
+        let btnAnterior = null;
+        let btnSiguiente = null;
+
         function expandir(img) {
+            indiceImagenActual = Array.from(imagenes).indexOf(img);
+
+            expandedImgContainer = document.createElement('div');
+            expandedImgContainer.style.position = 'fixed';
+            expandedImgContainer.style.top = '0';
+            expandedImgContainer.style.left = '0';
+            expandedImgContainer.style.width = '100%';
+            expandedImgContainer.style.height = '100%';
+            expandedImgContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'; /* Fondo oscuro */
+            expandedImgContainer.style.display = 'flex';
+            expandedImgContainer.style.justifyContent = 'center';
+            expandedImgContainer.style.alignItems = 'center';
+            expandedImgContainer.style.zIndex = '1001'; /* Mayor que la imagen expandida */
+            expandedImgContainer.onclick = cerrarExpansion;
+
             const expandedImg = document.createElement('img');
             expandedImg.src = img.src;
             expandedImg.style.maxWidth = '90%';
             expandedImg.style.maxHeight = '90%';
-            expandedImg.style.position = 'fixed';
-            expandedImg.style.top = '50%';
-            expandedImg.style.left = '50%';
-            expandedImg.style.transform = 'translate(-50%, -50%)';
-            expandedImg.style.zIndex = '1000';
+            expandedImg.style.width = 'auto';
+            expandedImg.style.height = 'auto';
             expandedImg.style.cursor = 'pointer';
-            expandedImg.onclick = function() {
-                document.body.removeChild(expandedImg);
-            };
-            document.body.appendChild(expandedImg);
+
+            btnAnterior = document.createElement('button');
+            btnAnterior.innerText = '<';
+            btnAnterior.style.position = 'absolute';
+            btnAnterior.style.left = '20px';
+            btnAnterior.style.top = '50%';
+            btnAnterior.style.transform = 'translateY(-50%)';
+            btnAnterior.style.fontSize = '2em';
+            btnAnterior.style.cursor = 'pointer';
+            btnAnterior.onclick = navegarAnterior;
+
+            btnSiguiente = document.createElement('button');
+            btnSiguiente.innerText = '>';
+            btnSiguiente.style.position = 'absolute';
+            btnSiguiente.style.right = '20px';
+            btnSiguiente.style.top = '50%';
+            btnSiguiente.style.transform = 'translateY(-50%)';
+            btnSiguiente.style.fontSize = '2em';
+            btnSiguiente.style.cursor = 'pointer';
+            btnSiguiente.onclick = navegarSiguiente;
+
+            expandedImgContainer.appendChild(expandedImg);
+            expandedImgContainer.appendChild(btnAnterior);
+            expandedImgContainer.appendChild(btnSiguiente);
+            document.body.appendChild(expandedImgContainer);
         }
 
-        function toggleReproductor() {
-            const audio = document.getElementById('audio');
-            if (audio.style.display === 'none') {
-                audio.style.display = 'block';
-            } else {
-                audio.style.display = 'none';
+        function cerrarExpansion() {
+            if (expandedImgContainer) {
+                document.body.removeChild(expandedImgContainer);
+                expandedImgContainer = null;
+                btnAnterior = null;
+                btnSiguiente = null;
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const audio = document.getElementById('audio');
-            audio.style.display = 'none';
-        });
-    </script>
-</body>
-</html>
+        function navegarAnterior(event) {
+            event.stopPropagation(); // Evita que se cierre la expansión al hacer clic en el botón
+            indiceImagenActual--;
