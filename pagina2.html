@@ -1,4 +1,84 @@
-<script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poemario - Página 2</title>
+    <style>
+        body {
+            margin: 0;
+            background-image: url('Fondo2.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .imagenes {
+            display: flex;
+            flex-direction: column; /* Apila las filas de imágenes */
+            align-items: center; /* Centra las filas de imágenes */
+            width: 80%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .fila-imagenes {
+            display: flex; /* Coloca las imágenes en fila */
+            justify-content: center; /* Centra las imágenes en la fila */
+            width: 100%;
+            margin-bottom: 10px; /* Espacio entre filas */
+        }
+        .fila-imagenes img {
+            max-width: 150px; /* Ancho máximo de cada imagen */
+            height: auto;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-sizing: border-box;
+        }
+        .fila-imagenes img:hover {
+            transform: scale(1.1);
+        }
+        #reproductor {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #reproductor img {
+            width: 50px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        #audio {
+            display: none;
+            width: 80%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="imagenes">
+        <div class="fila-imagenes">
+            <img src="imagen1.jpg" alt="Imagen 1" onclick="expandir(this)">
+            <img src="imagen2.jpg" alt="Imagen 2" onclick="expandir(this)">
+            <img src="imagen3.jpg" alt="Imagen 3" onclick="expandir(this)">
+        </div>
+        <div class="fila-imagenes">
+            <img src="imagen4.jpg" alt="Imagen 4" onclick="expandir(this)">
+            <img src="imagen5.jpg" alt="Imagen 5" onclick="expandir(this)">
+            <img src="imagen6.jpg" alt="Imagen 6" onclick="expandir(this)">
+        </div>
+    </div>
+    <div id="reproductor">
+        <img src="imagenreproductor.jpg" alt="Reproductor" onclick="toggleReproductor()">
+        <audio id="audio" src="piano.mp3" controls></audio>
+    </div>
+
+    <script>
         let imagenes = document.querySelectorAll('.imagenes img');
         let indiceImagenActual = 0;
         let expandedImgContainer = null;
@@ -104,3 +184,5 @@
             imagenes = document.querySelectorAll('.imagenes img'); // Aseguramos que las imágenes se seleccionen después de cargar el DOM
         });
     </script>
+</body>
+</html>
