@@ -18,22 +18,27 @@
         }
         .imagenes {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column; /* Apila las filas de imágenes */
+            align-items: center; /* Centra las filas de imágenes */
             width: 80%;
             margin-top: 20px;
             margin-bottom: 20px;
         }
-        .imagenes img {
-            width: calc(33.33% - 20px); /* Ajusta el ancho para tres imágenes por fila */
-            max-width: 150px; /* Añadimos un ancho máximo para limitar el tamaño */
-            height: auto; /* Mantiene la proporción de la imagen */
+        .fila-imagenes {
+            display: flex; /* Coloca las imágenes en fila */
+            justify-content: center; /* Centra las imágenes en la fila */
+            width: 100%;
+            margin-bottom: 10px; /* Espacio entre filas */
+        }
+        .fila-imagenes img {
+            max-width: 150px; /* Ancho máximo de cada imagen */
+            height: auto;
             margin: 10px;
             cursor: pointer;
             transition: transform 0.2s;
             box-sizing: border-box;
         }
-        .imagenes img:hover {
+        .fila-imagenes img:hover {
             transform: scale(1.1);
         }
         #reproductor {
@@ -57,12 +62,16 @@
 </head>
 <body>
     <div class="imagenes">
-        <img src="imagen1.jpg" alt="Imagen 1" onclick="expandir(this)">
-        <img src="imagen2.jpg" alt="Imagen 2" onclick="expandir(this)">
-        <img src="imagen3.jpg" alt="Imagen 3" onclick="expandir(this)">
-        <img src="imagen4.jpg" alt="Imagen 4" onclick="expandir(this)">
-        <img src="imagen5.jpg" alt="Imagen 5" onclick="expandir(this)">
-        <img src="imagen6.jpg" alt="Imagen 6" onclick="expandir(this)">
+        <div class="fila-imagenes">
+            <img src="imagen1.jpg" alt="Imagen 1" onclick="expandir(this)">
+            <img src="imagen2.jpg" alt="Imagen 2" onclick="expandir(this)">
+            <img src="imagen3.jpg" alt="Imagen 3" onclick="expandir(this)">
+        </div>
+        <div class="fila-imagenes">
+            <img src="imagen4.jpg" alt="Imagen 4" onclick="expandir(this)">
+            <img src="imagen5.jpg" alt="Imagen 5" onclick="expandir(this)">
+            <img src="imagen6.jpg" alt="Imagen 6" onclick="expandir(this)">
+        </div>
     </div>
     <div id="reproductor">
         <img src="imagenreproductor.jpg" alt="Reproductor" onclick="toggleReproductor()">
@@ -89,15 +98,15 @@
 
         function toggleReproductor() {
             const audio = document.getElementById('audio');
-            const isHidden = audio.style.display === 'none';
-            audio.style.display = isHidden ? 'block' : 'none';
+            if (audio.style.display === 'none') {
+                audio.style.display = 'block';
+            } else {
+                audio.style.display = 'none';
+            }
         }
 
-      function toggleReproductor() {
-        const audio = document.getElementById('audio');
-        if (audio.style.display === 'none') {
-            audio.style.display = 'block';
-        } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('audio');
             audio.style.display = 'none';
         });
     </script>
