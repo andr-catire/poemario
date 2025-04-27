@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poemario - Página 2</title>
     <style>
+        /* Estilos generales (para pantallas más grandes) */
         body {
             margin: 0;
             background-image: url('Fondo2.jpg');
@@ -18,20 +19,20 @@
         }
         .imagenes {
             display: flex;
-            flex-direction: column; /* Apila las filas de imágenes */
-            align-items: center; /* Centra las filas de imágenes */
+            flex-direction: column;
+            align-items: center;
             width: 80%;
             margin-top: 20px;
             margin-bottom: 20px;
         }
         .fila-imagenes {
-            display: flex; /* Coloca las imágenes en fila */
-            justify-content: center; /* Centra las imágenes en la fila */
+            display: flex;
+            justify-content: center;
             width: 100%;
-            margin-bottom: 10px; /* Espacio entre filas */
+            margin-bottom: 10px;
         }
         .fila-imagenes img {
-            max-width: 150px; /* Ancho máximo de cada imagen */
+            max-width: 150px;
             height: auto;
             margin: 10px;
             cursor: pointer;
@@ -57,6 +58,16 @@
             display: none;
             width: 80%;
             max-width: 400px;
+        }
+
+        /* Media query para pantallas de hasta 600 píxeles de ancho (típicamente teléfonos) */
+        @media (max-width: 600px) {
+            .expanded-img-container button {
+                font-size: 1.5em !important; /* Reduce el tamaño de la fuente */
+                padding: 5px 10px !important; /* Reduce el padding */
+                left: 10px !important; /* Ajusta la posición */
+                right: 10px !important; /* Ajusta la posición */
+            }
         }
     </style>
 </head>
@@ -89,16 +100,17 @@
             indiceImagenActual = Array.from(imagenes).indexOf(img);
 
             expandedImgContainer = document.createElement('div');
+            expandedImgContainer.classList.add('expanded-img-container'); // Añadimos la clase
             expandedImgContainer.style.position = 'fixed';
             expandedImgContainer.style.top = '0';
             expandedImgContainer.style.left = '0';
             expandedImgContainer.style.width = '100%';
             expandedImgContainer.style.height = '100%';
-            expandedImgContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'; /* Fondo oscuro */
+            expandedImgContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
             expandedImgContainer.style.display = 'flex';
             expandedImgContainer.style.justifyContent = 'center';
             expandedImgContainer.style.alignItems = 'center';
-            expandedImgContainer.style.zIndex = '1001'; /* Mayor que la imagen expandida */
+            expandedImgContainer.style.zIndex = '1001';
             expandedImgContainer.onclick = cerrarExpansion;
 
             const expandedImg = document.createElement('img');
