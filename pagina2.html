@@ -8,28 +8,48 @@
         body {
             margin: 0;
             background-image: url('Fondo2.jpg');
-            background-size: cover;
+            background-size: cover; /* Cubre todo el fondo */
+            background-repeat: no-repeat; /* Evita la repetición de la imagen */
+            background-attachment: fixed; /* Fija el fondo al viewport para un efecto de paralaje si el contenido es más largo */
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
         }
         .imagenes {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             width: 80%;
+            margin-top: 20px; /* Añade un margen superior para separarlo del borde superior si es necesario */
+            margin-bottom: 20px; /* Añade un margen inferior si es necesario */
         }
         .imagenes img {
-            width: 30%; /* Ajusta el tamaño según sea necesario */
+            width: calc(33.33% - 20px); /* Ajusta el tamaño para tres imágenes por fila con márgenes */
             margin: 10px;
             cursor: pointer;
             transition: transform 0.2s;
+            box-sizing: border-box; /* Incluye el padding y el border en el ancho y alto del elemento */
         }
         .imagenes img:hover {
             transform: scale(1.1);
         }
         #reproductor {
             margin-top: 20px;
+            margin-bottom: 20px; /* Añade un margen inferior para espaciado */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra el reproductor */
+        }
+        #reproductor img {
+            width: 50px;
+            cursor: pointer;
+            margin-bottom: 10px; /* Espacio entre el icono y los controles */
+        }
+        #audio {
+            display: none; /* Inicialmente oculto */
+            width: 80%; /* Ancho del reproductor de audio */
+            max-width: 400px; /* Ancho máximo del reproductor de audio */
         }
     </style>
 </head>
@@ -43,20 +63,22 @@
         <img src="imagen6.jpg" alt="Imagen 6" onclick="expandir(this)">
     </div>
     <div id="reproductor">
-        <img src="imagenreproductor.jpg" alt="Reproductor" style="width: 50px; cursor: pointer;" onclick="toggleReproductor()">
-        <audio id="audio" src="piano.mp3" controls style="display: none;"></audio>
+        <img src="imagenreproductor.jpg" alt="Reproductor" onclick="toggleReproductor()">
+        <audio id="audio" src="piano.mp3" controls></audio>
     </div>
 
     <script>
         function expandir(img) {
             const expandedImg = document.createElement('img');
             expandedImg.src = img.src;
-            expandedImg.style.width = '80%';
+            expandedImg.style.maxWidth = '90%'; /* Ajusta el tamaño máximo de la imagen expandida */
+            expandedImg.style.maxHeight = '90%';
             expandedImg.style.position = 'fixed';
             expandedImg.style.top = '50%';
             expandedImg.style.left = '50%';
             expandedImg.style.transform = 'translate(-50%, -50%)';
             expandedImg.style.zIndex = '1000';
+            expandedImg.style.cursor = 'pointer'; /* Indica que se puede hacer clic para cerrar */
             expandedImg.onclick = function() {
                 document.body.removeChild(expandedImg);
             };
@@ -65,12 +87,15 @@
 
         function toggleReproductor() {
             const audio = document.getElementById('audio');
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
+            const isHidden = audio.style.display === 'none';
+            audio.style.display = isHidden ? 'block' : 'none';
         }
+
+        // Asegurarse de que el reproductor de audio esté inicialmente oculto
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('audio');
+            audio.style.display = 'none';
+        });
     </script>
 </body>
 </html>
